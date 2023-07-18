@@ -32,6 +32,10 @@ func (p Product) GetItem() *entity.Item {
 	return p.item
 }
 
+func (p Product) GetPrice() float64 {
+	return p.price
+}
+
 // ------ Factory NewProduct ------------------------
 
 func NewProduct(name string, description string, price float64) (Product, error) {

@@ -1,7 +1,21 @@
 package product
 
-import "github.com/google/uuid"
+import (
+	"errors"
+
+	"github.com/google/uuid"
+	"github.com/pwkm/ddd-go/aggregate"
+)
+
+var (
+	ErrProductNotFound     = errors.New("the product was not found")
+	ErrProductAlreadyExist = errors.New("the product already exists")
+)
 
 type ProductRepository interface {
-	Get(uuid.UUID) aggregate.
+	GetAll() ([]aggregate.Product, error)
+	GetByID(id uuid.UUID) (aggregate.Product, error)
+	Add(product aggregate.Product) error
+	Update(product aggregate.Product) error
+	Delete(id uuid.UUID) error
 }
