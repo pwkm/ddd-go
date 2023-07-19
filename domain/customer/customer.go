@@ -6,7 +6,6 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/pwkm/tavern"
-	"github.com/pwkm/tavern/valueobject"
 )
 
 // ---    ERROR Messages    ---
@@ -23,7 +22,7 @@ type Customer struct {
 	// Person is the root entity of a customer
 	person       *tavern.Person
 	products     []*tavern.Item
-	transactions []valueobject.Transaction
+	transactions []tavern.Transaction
 }
 
 // GetID returns the customers root entity ID
@@ -70,6 +69,6 @@ func NewCustomer(name string) (Customer, error) {
 	return Customer{
 		person:       person,
 		products:     make([]*tavern.Item, 0),
-		transactions: make([]valueobject.Transaction, 0),
+		transactions: make([]tavern.Transaction, 0),
 	}, nil
 }

@@ -8,7 +8,7 @@ import (
 
 var (
 	ErrCustomerNotFound    = errors.New("the customer was not found in the repository")
-	ErrFailedToAddCustomer = errors.New("Failed to add the customer to the repository")
+	ErrFailedToAddCustomer = errors.New("failed to add the customer to the repository")
 	ErrUpdateCustomer      = errors.New("failed to update the customer in the repository")
 )
 
