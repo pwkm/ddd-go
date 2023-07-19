@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/google/uuid"
-	"github.com/pwkm/ddd-go/aggregate"
+
 	"github.com/pwkm/ddd-go/domain/customer"
 	"github.com/pwkm/ddd-go/domain/customer/memory"
 	"github.com/pwkm/ddd-go/domain/customer/mongo"
@@ -35,7 +35,7 @@ func (o *OrderService) CreateOrder(customerID uuid.UUID, productIDs []uuid.UUID)
 	}
 
 	// Get each Product, Ouchie, We need a ProductRepository
-	var products []aggregate.Product
+	var products []product.Product
 	var price float64
 	for _, id := range productIDs {
 		p, err := o.products.GetByID(id)
@@ -89,7 +89,7 @@ func WithMemoryCustomerRepository() OrderConfiguration {
 
 // ----------------- WithMemoryProductRepository -------------------
 // WithMemoryProductRepository adds a in memory product repo and adds all input products
-func WithMemoryProductRepository(products []aggregate.Product) OrderConfiguration {
+func WithMemoryProductRepository(products []product.Product) OrderConfiguration {
 	return func(os *OrderService) error {
 		// Create the memory repo, if we needed parameters, such as connection strings they could be inputted here
 		pr := prodmemory.New()

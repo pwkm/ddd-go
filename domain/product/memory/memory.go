@@ -5,13 +5,13 @@ import (
 	"sync"
 
 	"github.com/google/uuid"
-	"github.com/pwkm/ddd-go/aggregate"
+
 	"github.com/pwkm/ddd-go/domain/product"
 )
 
 // MemoryProductRepository fulfills the ProductRepository interface
 type MemoryProductRepository struct {
-	products map[uuid.UUID]aggregate.Product
+	products map[uuid.UUID]product.Product
 	sync.Mutex
 }
 
@@ -19,8 +19,8 @@ type MemoryProductRepository struct {
 // GetAll returns all products as a slice
 // Yes, it never returns an error, but
 // A database implementation could return an error for instance
-func (mpr *MemoryProductRepository) GetAll() ([]aggregate.Product, error) {
-	var products []aggregate.Product
+func (mpr *MemoryProductRepository) GetAll() ([]product.Product, error) {
+	var products []product.Product
 
 	for _, product := range mpr.products {
 		products = append(products, product)
@@ -29,15 +29,15 @@ func (mpr *MemoryProductRepository) GetAll() ([]aggregate.Product, error) {
 }
 
 // -------------------FIND product by ID -------------
-func (mpr *MemoryProductRepository) GetByID(id uuid.UUID) (aggregate.Product, error) {
+func (mpr *MemoryProductRepository) GetByID(id uuid.UUID) (product.Product, error) {
 	if product, ok := mpr.products[id]; ok {
 		return product, nil
 	}
-	return aggregate.Product{}, product.ErrProductNotFound
+	return product.Product{}, product.ErrProductNotFound
 }
 
 // -------- ADD a product to the repository  ---------
-func (mpr *MemoryProductRepository) Add(newprod aggregate.Product) error {
+func (mpr *MemoryProductRepository) Add(newprod product.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
 
@@ -50,7 +50,7 @@ func (mpr *MemoryProductRepository) Add(newprod aggregate.Product) error {
 }
 
 // ------------------ UPDATE A PRODUCT --------------
-func (mpr *MemoryProductRepository) Update(upprod aggregate.Product) error {
+func (mpr *MemoryProductRepository) Update(upprod product.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
 
@@ -80,6 +80,6 @@ func (mpr *MemoryProductRepository) Delete(id uuid.UUID) error {
 // New is a factory function to generate a new repository of customers
 func New() *MemoryProductRepository {
 	return &MemoryProductRepository{
-		products: make(map[uuid.UUID]aggregate.Product),
+		products: make(map[uuid.UUID]product.Product),
 	}
 }
