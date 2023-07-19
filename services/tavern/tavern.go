@@ -1,9 +1,10 @@
-package services
+package tavern
 
 import (
 	"log"
 
 	"github.com/google/uuid"
+	"github.com/pwkm/tavern/services/order"
 )
 
 // TavernConfiguration is an alias that takes a pointer and modifies the Tavern
@@ -11,7 +12,7 @@ type tavernConfiguration func(os *Tavern) error
 
 type Tavern struct {
 	// orderservice is used to handle orders
-	OrderService *OrderService
+	OrderService *order.OrderService
 	// BillingService is used to handle billing
 	// This is up to you to implement
 	BillingService interface{}
@@ -34,7 +35,7 @@ func NewTavern(cfgs ...tavernConfiguration) (*Tavern, error) {
 }
 
 // WithOrderService applies a given OrderService to the Tavern
-func WithOrderService(os *OrderService) tavernConfiguration {
+func WithOrderService(os *order.OrderService) tavernConfiguration {
 	// return a function that matches the TavernConfiguration signature
 
 	return func(t *Tavern) error {

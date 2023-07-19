@@ -1,20 +1,22 @@
-package services
+package tavern
 
 import (
 	"testing"
 
 	"github.com/google/uuid"
 	"github.com/pwkm/tavern/domain/customer"
+	"github.com/pwkm/tavern/services/order"
 )
 
 func Test_Tavern(t *testing.T) {
 	// Create OrderService
-	products := init_products(t)
 
-	os, err := NewOrderService(
+	products := order.init_products(t)
+
+	os, err := order.NewOrderService(
 		// WithMemoryCustomerRepository(),
-		WithMongoCustomerRepository("mongodb://localhost:2717"),
-		WithMemoryProductRepository(products),
+		order.WithMongoCustomerRepository("mongodb://localhost:2717"),
+		order.WithMemoryProductRepository(products),
 	)
 	if err != nil {
 		t.Error(err)
