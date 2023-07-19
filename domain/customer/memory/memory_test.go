@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/pwkm/ddd-go/aggregate"
 	"github.com/pwkm/ddd-go/domain/customer"
 )
 
@@ -16,14 +15,14 @@ func TestMemory_GetCustomer(t *testing.T) {
 	}
 
 	// create a fake customer to add to the repo
-	cust, err := aggregate.NewCustomer("Peter")
+	cust, err := customer.NewCustomer("Peter")
 	if err != nil {
 		t.Fatal(err)
 	}
 	id := cust.GetID()
 
 	repo := MemoryRepository{
-		customers: map[uuid.UUID]aggregate.Customer{
+		customers: map[uuid.UUID]customer.Customer{
 			id: cust,
 		},
 	}
@@ -68,9 +67,9 @@ func TestMemory_AddCustomer(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			repo := MemoryRepository{
-				customers: map[uuid.UUID]aggregate.Customer{},
+				customers: map[uuid.UUID]customer.Customer{},
 			}
-			cust, err := aggregate.NewCustomer(tc.cust)
+			cust, err := customer.NewCustomer(tc.cust)
 			if err != nil {
 				t.Fatal(err)
 			}

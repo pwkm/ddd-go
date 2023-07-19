@@ -5,6 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/pwkm/ddd-go/aggregate"
+	"github.com/pwkm/ddd-go/domain/customer"
 )
 
 func init_products(t *testing.T) []aggregate.Product {
@@ -40,7 +41,7 @@ func TestOrder_NewOrderService(t *testing.T) {
 	}
 
 	// Add Customer
-	cust, err := aggregate.NewCustomer("Percy")
+	cust, err := customer.NewCustomer("Percy")
 	if err != nil {
 		t.Error(err)
 	}
