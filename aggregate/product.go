@@ -16,7 +16,7 @@ var (
 //	AGGREGATE PRODUCT
 //
 // -----------------------------------------------------
-
+// Product is a aggregate that combines item with a price and quantity
 type Product struct {
 	item     *entity.Item
 	price    float64
@@ -24,7 +24,6 @@ type Product struct {
 }
 
 func (p Product) GetID() uuid.UUID {
-
 	return p.item.ID
 }
 
@@ -37,7 +36,8 @@ func (p Product) GetPrice() float64 {
 }
 
 // ------ Factory NewProduct ------------------------
-
+// NewProduct will create a new product
+// will return error if name of description is empty
 func NewProduct(name string, description string, price float64) (Product, error) {
 
 	if name == "" || description == "" {

@@ -15,6 +15,7 @@ type MemoryProductRepository struct {
 	sync.Mutex
 }
 
+// ------------------- GETALL ---------------------
 // GetAll returns all products as a slice
 // Yes, it never returns an error, but
 // A database implementation could return an error for instance
@@ -24,7 +25,6 @@ func (mpr *MemoryProductRepository) GetAll() ([]aggregate.Product, error) {
 	for _, product := range mpr.products {
 		products = append(products, product)
 	}
-
 	return products, nil
 }
 
@@ -50,17 +50,16 @@ func (mpr *MemoryProductRepository) Add(newprod aggregate.Product) error {
 }
 
 // ------------------ UPDATE A PRODUCT --------------
-func (mpr *MemoryProductRepository) Update(product aggregate.Product) error {
+func (mpr *MemoryProductRepository) Update(upprod aggregate.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
 
-	id := product.GetID()
-	if _, ok := mpr.products[id]; !ok {
+	if _, ok := mpr.products[upprod.GetID()]; !ok {
 		return product.ErrProductNotFound
 
 	}
 
-	mpr.products[id] = product
+	mpr.products[upprod.GetID()] = upprod
 	return nil
 }
 
