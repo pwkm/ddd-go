@@ -2,12 +2,14 @@
 package services
 
 import (
+	"context"
 	"log"
 
 	"github.com/google/uuid"
 	"github.com/pwkm/ddd-go/aggregate"
 	"github.com/pwkm/ddd-go/domain/customer"
 	"github.com/pwkm/ddd-go/domain/customer/memory"
+	"github.com/pwkm/ddd-go/domain/customer/mongo"
 	"github.com/pwkm/ddd-go/domain/product"
 	prodmemory "github.com/pwkm/ddd-go/domain/product/memory"
 )
@@ -100,6 +102,20 @@ func WithMemoryProductRepository(products []aggregate.Product) OrderConfiguratio
 			}
 		}
 		os.products = pr
+		return nil
+	}
+}
+
+// ----------------- WithMongoCustomerRepository -------------------
+func WithMongoCustomerRepository(connectionString string) OrderConfiguration {
+
+	return func(os *OrderService) error {
+		// Create the mongo repo, if we needed parameters, such as connection strings they could be inputted here
+		cr, err := mongo.New(context.Background(), connectionString)
+		if err != nil {
+			return err
+		}
+		os.customers = cr
 		return nil
 	}
 }
