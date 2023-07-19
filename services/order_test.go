@@ -5,8 +5,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/pwkm/ddd-go/domain/customer"
-	"github.com/pwkm/ddd-go/domain/product"
+	"github.com/pwkm/tavern/domain/customer"
+	"github.com/pwkm/tavern/domain/product"
 )
 
 func init_products(t *testing.T) []product.Product {

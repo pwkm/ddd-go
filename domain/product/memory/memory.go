@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/pwkm/ddd-go/domain/product"
+	"github.com/pwkm/tavern/domain/product"
 )
 
 // MemoryProductRepository fulfills the ProductRepository interface

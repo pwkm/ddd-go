@@ -1,4 +1,4 @@
-module github.com/pwkm/ddd-go
+module github.com/pwkm/tavern
 
 go 1.20
 

@@ -7,11 +7,11 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/pwkm/ddd-go/domain/customer"
-	"github.com/pwkm/ddd-go/domain/customer/memory"
-	"github.com/pwkm/ddd-go/domain/customer/mongo"
-	"github.com/pwkm/ddd-go/domain/product"
-	prodmemory "github.com/pwkm/ddd-go/domain/product/memory"
+	"github.com/pwkm/tavern/domain/customer"
+	"github.com/pwkm/tavern/domain/customer/memory"
+	"github.com/pwkm/tavern/domain/customer/mongo"
+	"github.com/pwkm/tavern/domain/product"
+	prodmemory "github.com/pwkm/tavern/domain/product/memory"
 )
 
 // OrderConfiguration is an alias for a function that will take in a pointer to an

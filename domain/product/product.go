@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	"github.com/pwkm/ddd-go/entity"
+	"github.com/pwkm/tavern"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 // -----------------------------------------------------
 // Product is a aggregate that combines item with a price and quantity
 type Product struct {
-	item     *entity.Item
+	item     *tavern.Item
 	price    float64
 	quantity int
 }
@@ -27,7 +27,7 @@ func (p Product) GetID() uuid.UUID {
 	return p.item.ID
 }
 
-func (p Product) GetItem() *entity.Item {
+func (p Product) GetItem() *tavern.Item {
 	return p.item
 }
 
@@ -45,7 +45,7 @@ func NewProduct(name string, description string, price float64) (Product, error)
 	}
 
 	return Product{
-		item: &entity.Item{
+		item: &tavern.Item{
 			ID:          uuid.New(),
 			Name:        name,
 			Description: description,
