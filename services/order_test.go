@@ -31,7 +31,8 @@ func TestOrder_NewOrderService(t *testing.T) {
 	products := init_products(t)
 
 	os, err := NewOrderService(
-		WithMemoryCustomerRepository(),
+		//WithMemoryCustomerRepository(),
+		WithMongoCustomerRepository("mongodb://localhost:2717"),
 		WithMemoryProductRepository(products),
 	)
 	if err != nil {
