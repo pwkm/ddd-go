@@ -1,4 +1,7 @@
 // Package entities holds all the entities that are shared across all subdomains
+// An entity is a struct with a unique identifier to reference it, which has states that can change.
+// And by this, the names of the variables are in Upper Case.
+
 package entity
 
 import (

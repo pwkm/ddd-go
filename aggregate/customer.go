@@ -1,4 +1,15 @@
 // Package aggregates holds aggregates that combines many entities into a full object
+// An important rule in DDD aggregates is that they should only have one entity act as a root entity.
+// What this means is that the reference of the root entity is also used to reference the aggregate.
+// For our customer aggregate, this means that the Person ID is the unique identifier.
+//
+// Notice that all fields in the struct begins with lower case letters, this is a way in Go to make an object inaccessible from outside of
+// the package the struct is defined in.
+// This is done because an Aggregate should not allow direct access to the data.
+// Neither does the struct define any tags for how the data is formatted such as json.
+// I set all the entities as pointers, this is because an entity can change state and I want that to reflect across all instances of the runtime that has access to it.
+// The value objects are held as nonpointers though since they cannot change state.
+
 package aggregate
 
 import (
@@ -26,6 +37,8 @@ type Customer struct {
 }
 
 // NewCustomer is a factory to create a new Customer aggregate
+// he factory pattern is a design pattern that is used to encapsulate complex logic
+// in functions that creates the wanted instance, without the caller knowing anything about the implementation details.
 // It will validate that the name is not empty
 func NewCustomer(name string) (Customer, error) {
 	// Validate that the Name is not empty

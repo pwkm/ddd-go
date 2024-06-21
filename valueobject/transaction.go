@@ -1,3 +1,4 @@
+// Value Objects are structs that are immutable and do not need a unique identifier.
 package valueobject
 
 import (
